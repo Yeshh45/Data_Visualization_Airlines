@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Passenger Satisfaction Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> <!-- Optional: For interactivity -->
+</head>
+<body>
+    <header>
+        <h1>Airline Passenger Satisfaction Analysis</h1>
+        <p>Explore the factors affecting passenger satisfaction.</p>
+    </header>
+    
+    <main>
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>This project analyzes the factors affecting airline passenger satisfaction based on various data points.</p>
+        </section>
+
+        <section id="visualizations">
+            <h2>Interactive Visualizations</h2>
+            <div id="tableau-dashboard">
+                <iframe src="https://public.tableau.com/views/Project1SDVVisualizations/FinalVisualization?:embed=y&:display_count=yes" width="800" height="600"></iframe>
+            </div>
+        </section>
+
+        <section id="feedback">
+            <h2>Feedback</h2>
+            <form id="feedback-form">
+                <label for="comments">Your Comments:</label>
+                <textarea id="comments" name="comments" rows="4" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Airline Satisfaction Project</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
