@@ -1,46 +1,78 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airline Passenger Satisfaction Analysis</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> <!-- Optional: For interactivity -->
+    <title>Airline Satisfaction Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        .tableau-container {
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <header>
+    <!-- Header -->
+    <div class="header">
         <h1>Airline Passenger Satisfaction Analysis</h1>
-        <p>Explore the factors affecting passenger satisfaction.</p>
-    </header>
-    
-    <main>
-        <section id="overview">
-            <h2>Overview</h2>
-            <p>This project analyzes the factors affecting airline passenger satisfaction based on various data points.</p>
-        </section>
+        <p>By Team 5: Yeshwanth Govindu & Venkata Haritha Sai Sri Animilli</p>
+    </div>
 
-        <section id="visualizations">
-            <h2>Interactive Visualizations</h2>
-            <div id="tableau-dashboard">
-                <iframe src="https://public.tableau.com/views/Project1SDVVisualizations/FinalVisualization?:embed=y&:display_count=yes" width="800" height="600"></iframe>
+    <!-- Class Filter -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <label>Filter by Class:</label>
+                <select id="classFilter" class="form-select">
+                    <option value="All">All Classes</option>
+                    <option value="Economy">Economy</option>
+                    <option value="Business">Business</option>
+                </select>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <section id="feedback">
-            <h2>Feedback</h2>
-            <form id="feedback-form">
-                <label for="comments">Your Comments:</label>
-                <textarea id="comments" name="comments" rows="4" required></textarea>
-                <button type="submit">Submit</button>
-            </form>
-        </section>
-    </main>
+    <!-- Tableau Dashboard -->
+    <div class="tableau-container container">
+        <div id="tableauViz"></div>
+    </div>
 
-    <footer>
-        <p>&copy; 2023 Airline Satisfaction Project</p>
-    </footer>
+    <!-- Tableau JavaScript API -->
+    <script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        let viz;
 
-    <script src="script.js"></script>
+        function initViz() {
+            const containerDiv = document.getElementById("tableauViz");
+            const vizUrl = "https://public.tableau.com/views/Project1SDVVisualizations/FinalVisualization";
+            const options = {
+                hideTabs: true,
+                width: "100%",
+                height: "800px",
+                onFirstInteractive: () => console.log("Dashboard loaded!")
+            };
+            viz = new tableau.Viz(containerDiv, vizUrl, options);
+        }
+
+        initViz();
+
+        // Class Filter
+        document.getElementById("classFilter").addEventListener("change", (e) => {
+            const sheet = viz.getWorkbook().getActiveSheet();
+            sheet.applyFilterAsync("Class", e.target.value, tableau.FilterUpdateType.REPLACE);
+        });
+    </script>
 </body>
 </html>
